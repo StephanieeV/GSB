@@ -101,7 +101,7 @@
                                 <li <?php if ($uc == 'gererFrais') { ?>class="active"<?php } ?>>
                                     <a href="index.php?uc=gererFrais&action=saisirFrais">
                                         <span class="glyphicon glyphicon-ok"></span>
-                                        Valider les fiches de frais
+                                        Valider les fiches d frais
                                     </a>
                                 </li>
                                 <li <?php if ($uc == 'etatFrais') { ?>class="active"<?php } ?>>
