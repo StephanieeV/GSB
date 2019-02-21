@@ -29,7 +29,7 @@
     <body>
         <div class="container">
             <?php
-            $type= $_SESSION['type'];
+            $type = filter_input(INPUT_GET, 'type', FILTER_SANITIZE_STRING);
             $uc = filter_input(INPUT_GET, 'uc', FILTER_SANITIZE_STRING);
             if ($estConnecte) {
                 if ($type == 'visiteur'){
