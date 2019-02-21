@@ -29,9 +29,10 @@
     <body>
         <div class="container">
             <?php
-            $type = filter_input(INPUT_GET, 'type', FILTER_SANITIZE_STRING);
+            
             $uc = filter_input(INPUT_GET, 'uc', FILTER_SANITIZE_STRING);
             if ($estConnecte) {
+                $type= $_SESSION['type'];
                 if ($type == 'visiteur'){
                     ?>
                     <div class="header">
@@ -76,9 +77,9 @@
                     </div>                  
                  
                 <?php
-                } elseif ($type == 'comptable') {
+                } else {
                 
-            } {
+            
                     ?>
                     
                     <div class="header">
