@@ -38,11 +38,29 @@
 
 class PdoGsb
 {
+    /** Variable static de nom @name $serveur, renseigne le nom du serveur
+     *  @static
+     */
     private static $serveur = 'mysql:host=localhost';
+    /** Variable static de nom @name $bdd, renseigne le nom de la base de données
+     *  @static 
+     */
     private static $bdd = 'dbname=gsb_frais';
+    /** Variable static de nom @name $user, renseigne le nom de utilisateur qui à accès à la base de données
+     *  @static
+     */
     private static $user = 'userGsb';
+    /** Variable static de nom @name $mdp, renseigne le mot de passe de utilisateur
+     * @static 
+     */
     private static $mdp = 'secret';
+    /** Variable static de nom @name $monPdo, celle qui recevra l'instanciation de la classe
+     * @static 
+     */
     private static $monPdo;
+    /** Variable static de nom @name $monPdo, classe primaire qui contient @name $monPdo
+     * @static 
+     */
     private static $monPdoGsb = null;
 
     /**
@@ -103,14 +121,38 @@ class PdoGsb
         $requetePrepare->execute();
         return $requetePrepare->fetch();
     }
-    
+     /**
+      * 
+      * @param bdd $pdo 
+      * @param String $idVisiteur ID du visiteur
+      * @return le type de la personne
+      */
     public function getType($pdo,$idVisiteur){
-    $req = 'SELECT type '
-            . 'FROM visiteur '
-            . 'WHERE id='. $idVisiteur;
-    $res = $pdo->query($req);
-    $type = $res->fetch();
-    return $type;
+        $req = 'SELECT type '
+                . 'FROM visiteur '
+                . 'WHERE id='. $idVisiteur;
+        $res = $pdo->query($req);
+        $type = $res->fetch();
+        return $type;
+    }
+    
+    /**
+     * Retourne les noms et prenoms des visiteurs
+     *
+     * @param bdd $pdo 
+     *
+     * @return un tableau associatif de clé un mois -aaaamm- et de valeurs
+     *         l'année et le mois correspondant
+     */
+    
+    public function getListeVisiteur(){
+        
+        $req = 'SELECT visiteur.id AS id, visiteur.nom AS nom AND visiteur.prenom AS prenom '
+                . 'FROM visiteur '
+                . 'WHERE visiteur.type="visiteur"';
+        $res = PdoGsb::$monPdo->query($req);
+        $nom = $res->fetch();
+        return $nom;
     }
 
     /**
@@ -494,5 +536,33 @@ class PdoGsb
         $requetePrepare->bindParam(':unIdVisiteur', $idVisiteur, PDO::PARAM_STR);
         $requetePrepare->bindParam(':unMois', $mois, PDO::PARAM_STR);
         $requetePrepare->execute();
+    }
+
+    /**
+     * Retourne les mois des fiche de frais à valider
+     * @param string $etat Etat des fiches à sélectionner
+     * @return array un tableau associatif de clé un mois -aaaamm- et de valeurs l'année et le mois correspondant 
+     */
+    public function getLesMoisAValider($etat){
+        $req = "SELECT DISTINCT ficheFrais.mois AS mois FROM ficheFrais";
+        if($etat!= null){
+            $req = $req . " WHERE ficheFrais.idEtat='$etat'";
+        }
+        $req = $req . " ORDER BY ficheFrais.mois DESC";
+        $res = PdoGsb::$monPdo->query($req);
+        $lesMois = array();
+        $laLigne = $res->fetch();
+        while($laLigne != null)	{
+            $mois = $laLigne['mois'];
+            $numAnnee =substr($mois,0,4);
+            $numMois =substr($mois,4,2);
+            $lesMois["$mois"]=array(
+                "mois"      => "$mois",
+                "numAnnee"  => "$numAnnee",
+                "numMois"   => "$numMois"
+            );
+            $laLigne = $res->fetch(); 
+        }
+        return $lesMois;
     }
 }
