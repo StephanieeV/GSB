@@ -42,7 +42,7 @@ switch ($action) {
         $moisASelectionner = $lesCles[0];
         break;
     case 'voirFicheFrais':
-        // Affichage des vues en fonction du test en bas de la page
+        // Permet d'afficher la vue 
         break;
     case 'majFraisForfait':
         // On met à jour les frais forfait si besoin
@@ -120,8 +120,9 @@ switch ($action) {
 }
 
 // On affiche les vues
+// Permet d'afficher la vue tout le temps
 include 'vues/v_choixVisiteurMois.php';
-// Test sur l'action 'selectionnerVisiteurEtMois'
+
 if ($action != 'selectionnerVisiteurEtMois'){
     // Test s'il existe une fiche de frais pour le visiteur et le mois sélectionné
     // Si elle existe on affiche les vues nécessaires, si elle n'existe pas on renvoie un message d'erreur
