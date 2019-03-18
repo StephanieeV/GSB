@@ -248,3 +248,15 @@ function nbErreurs()
         return count($_REQUEST['erreurs']);
     }
 }
+
+/**
+ * Ajoute le libellé d'un succès
+ *
+ * @param String $msg Libellé du succès.
+ *
+ * @return null
+ */
+function ajouterSucces($msg)
+{
+    $_REQUEST['succes'] = $msg;
+}
