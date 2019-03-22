@@ -1,0 +1,32 @@
+<?php
+
+/**
+ * Vue de la validation
+ *
+ * PHP Version 7
+ *
+ * @category  PPE
+ * @package   GSB
+ * @author    Réseau CERTA <contact@reseaucerta.org>
+ * @author    José GIL <jgil@ac-nice.fr>
+ * @author    Stéphanie Viéville
+ * @copyright 2017 Réseau CERTA
+ * @license   Réseau CERTA
+ * @version   GIT: <0>
+ * @link      http://www.reseaucerta.org Contexte « Laboratoire GSB »
+ */
+?>
+<br>
+<div class="center-div">
+    <form method="post" 
+          action="index.php?uc=validerFicheFrais&action=validerFiche" 
+          role="form">
+        <fieldset>
+            <input type="hidden" name="lstVisiteur" value="<?php echo $leVisiteur ?>">
+            <input type="hidden" name="lstMois" value="<?php echo $leMois ?>">
+            <button class="btn btn-success center-button" type="submit" onclick="return confirm('Voulez-vous vraiment valider cette fiche?');">Valider la fiche</button>
+            
+        </fieldset>
+    </form>
+</div>
+<br>
