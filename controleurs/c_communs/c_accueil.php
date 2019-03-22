@@ -21,15 +21,15 @@ if ($estConnecte)
    
 if ($estConnecte &&  $type=="visiteur")
     {
-    include 'vues/v_accueil.php';
+    include 'vues/v_visiteur/v_accueil.php';
     }
 else
     {
     if ($estConnecte &&  $type=="comptable")
     {
-    include 'vues/v_accueilComptable.php';
+    include 'vues/v_comptable/v_accueilComptable.php';
     }
  else {   
-    include 'vues/v_connexion.php';
+    include 'vues/v_communes/v_connexion.php';
  }
 }

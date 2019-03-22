@@ -1,9 +1,18 @@
 <?php
-
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Gestion de la validation des fiches de frais
+ *
+ * PHP Version 7
+ *
+ * @category  PPE
+ * @package   GSB
+ * @author    Réseau CERTA <contact@reseaucerta.org>
+ * @author    José GIL <jgil@ac-nice.fr>
+ * @author    Stéphanie Viéville
+ * @copyright 2017 Réseau CERTA
+ * @license   Réseau CERTA
+ * @version   GIT: <0>
+ * @link      http://www.reseaucerta.org Contexte « Laboratoire GSB »
  */
 
 $action = filter_input(INPUT_GET, 'action', FILTER_SANITIZE_STRING);
@@ -51,10 +60,10 @@ switch ($action) {
         if (lesQteFraisValides($lesFrais)) {
             $pdo->majFraisForfait($leVisiteur, $leMois, $lesFrais);
             ajouterSucces('Les modifications ont été prises en compte.');
-            include 'vues/v_succes.php';
+            include 'vues/v_communes/v_succes.php';
         } else {
             ajouterErreur('Les valeurs des frais sont invalides. Vérifiez que les valeurs soient numériques.');
-            include 'vues/v_erreurs.php';
+            include 'vues/v_communes/v_erreurs.php';
         }
         $lesFraisForfait = $pdo->getLesFraisForfait($leVisiteur, $leMois);
         break;
@@ -121,17 +130,18 @@ switch ($action) {
 
 // On affiche les vues
 // Permet d'afficher la vue tout le temps
-include 'vues/v_choixVisiteurMois.php';
+include 'vues/v_comptable/v_choixVisiteurMois.php';
 
 if ($action != 'selectionnerVisiteurEtMois'){
     // Test s'il existe une fiche de frais pour le visiteur et le mois sélectionné
     // Si elle existe on affiche les vues nécessaires, si elle n'existe pas on renvoie un message d'erreur
     if ($pdo->existeFicheFrais($leVisiteur, $leMois)) {
-            include 'vues/v_infosEtatFicheFrais.php';
-            include 'vues/v_majFraisForfait.php';
-            include 'vues/v_majFraisHorsForfait.php';
+            include 'vues/v_comptable/v_infosEtatFicheFrais.php';
+            include 'vues/v_comptable/v_majFraisForfait.php';
+            include 'vues/v_comptable/v_majFraisHorsForfait.php';
+            include 'vues/v_comptable/v_validationFicheFrais.php';
         } else {
             ajouterErreur('Pas de fiche de frais pour le visiteur et le mois sélectionné.');
-            include 'vues/v_erreurs.php';
+            include 'vues/v_communes/v_erreurs.php';
         }
 }

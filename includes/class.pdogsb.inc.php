@@ -8,6 +8,7 @@
  * @package   GSB
  * @author    Cheri Bibi - Réseau CERTA <contact@reseaucerta.org>
  * @author    José GIL - CNED <jgil@ac-nice.fr>
+ * @author    Stéphanie Viéville
  * @copyright 2017 Réseau CERTA
  * @license   Réseau CERTA
  * @version   GIT: <0>
@@ -30,6 +31,7 @@
  * @package   GSB
  * @author    Cheri Bibi - Réseau CERTA <contact@reseaucerta.org>
  * @author    José GIL <jgil@ac-nice.fr>
+ * @author    Stéphanie Viéville
  * @copyright 2017 Réseau CERTA
  * @license   Réseau CERTA
  * @version   Release: 1.0
@@ -661,7 +663,8 @@ class PdoGsb
         $requetePrepare->execute();
         return $requetePrepare->fetch();
     }
-        /**
+    
+    /**
      * Retourne sous forme d'un tableau associatif toutes les fiches de frais 
      * "validées" et "mises en paiement" avec les infos des visiteurs et 
      * mois correspondant.

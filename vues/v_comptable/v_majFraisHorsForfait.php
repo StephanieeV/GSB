@@ -1,9 +1,19 @@
 <?php
 
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Vue de la mise à jour des frais hors forfait
+ *
+ * PHP Version 7
+ *
+ * @category  PPE
+ * @package   GSB
+ * @author    Réseau CERTA <contact@reseaucerta.org>
+ * @author    José GIL <jgil@ac-nice.fr>
+ * @author    Stéphanie Viéville
+ * @copyright 2017 Réseau CERTA
+ * @license   Réseau CERTA
+ * @version   GIT: <0>
+ * @link      http://www.reseaucerta.org Contexte « Laboratoire GSB »
  */
 ?>
 <hr>
@@ -61,17 +71,3 @@
     <label for="nbJustificatifs" accesskey="n">Justificatifs reçus : </label>
     <input type="text" id="nbJustificatifs" name="nbJustificatifs" value="<?php echo $nbJustificatifs ?>" size="4" class="form-control" style="width:50px;"/>
 </div>
-<br>
-<div class="center-div">
-    <form method="post" 
-          action="index.php?uc=validerFicheFrais&action=validerFiche" 
-          role="form">
-        <fieldset>
-            <input type="hidden" name="lstVisiteur" value="<?php echo $leVisiteur ?>">
-            <input type="hidden" name="lstMois" value="<?php echo $leMois ?>">
-            <button class="btn btn-success center-button" type="submit" onclick="return confirm('Voulez-vous vraiment valider cette fiche?');">Valider la fiche</button>
-            
-        </fieldset>
-    </form>
-</div>
-<br>

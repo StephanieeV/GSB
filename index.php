@@ -8,6 +8,7 @@
  * @package   GSB
  * @author    Réseau CERTA <contact@reseaucerta.org>
  * @author    José GIL <jgil@ac-nice.fr>
+ * @author    Stéphanie Viéville
  * @copyright 2017 Réseau CERTA
  * @license   Réseau CERTA
  * @version   GIT: <0>
@@ -19,7 +20,7 @@ require_once 'includes/class.pdogsb.inc.php';
 session_start();
 $pdo = PdoGsb::getPdoGsb();
 $estConnecte = estConnecte();
-require 'vues/v_entete.php';
+require 'vues/v_communes/v_entete.php';
 $uc = filter_input(INPUT_GET, 'uc', FILTER_SANITIZE_STRING);
 if ($uc && !$estConnecte) {
     $uc = 'connexion';
@@ -28,25 +29,25 @@ if ($uc && !$estConnecte) {
 }
 switch ($uc) {
 case 'connexion':
-    include 'controleurs/c_connexion.php';
+    include 'controleurs/c_communs/c_connexion.php';
     break;
 case 'accueil':
-    include 'controleurs/c_accueil.php';
+    include 'controleurs/c_communs/c_accueil.php';
     break;
 case 'gererFrais':
-    include 'controleurs/c_gererFrais.php';
+    include 'controleurs/c_visiteur/c_gererFrais.php';
     break;
 case 'etatFrais':
-    include 'controleurs/c_etatFrais.php';
+    include 'controleurs/c_visiteur/c_etatFrais.php';
     break;
 case 'validerFicheFrais':
-    include 'controleurs/c_validerFicheFrais.php';
+    include 'controleurs/c_comptable/c_validerFicheFrais.php';
     break;
 case 'suiviPaiement':
-    include 'controleurs/c_suiviPaiement.php';
+    include 'controleurs/c_comptable/c_suiviPaiement.php';
     break;
 case 'deconnexion':
-    include 'controleurs/c_deconnexion.php';
+    include 'controleurs/c_communs/c_deconnexion.php';
     break;
 }
-require 'vues/v_pied.php';
+require 'vues/v_communes/v_pied.php';
